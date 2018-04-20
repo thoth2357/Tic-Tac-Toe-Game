@@ -12,6 +12,7 @@ import Pmw
 from random import shuffle
 # import tkinter.ttk as ttk
 
+
 class Game(tk.Tk):
     "The class for the game"
     global b_list, appender_lst
@@ -69,7 +70,7 @@ class Game(tk.Tk):
 
     def Msg(self):
         'callback for the Help menubutton'
-        msg.showinfo('Help', 'Write help here')
+        msg.showinfo('Help')
 
     def About(self):
         'callback for the About menubutton'
@@ -95,7 +96,7 @@ class Game(tk.Tk):
         else:
             b_list.append(0)
         # print(b_list)
-        self.turns(0)
+        self.turns()
 
     def cb1(self):
         'Callback for button 2'
@@ -104,7 +105,7 @@ class Game(tk.Tk):
         else:
             b_list.append(1)
         # print(b_list)
-        self.turns(1)
+        self.turns()
 
     def cb2(self):
         'Callback for button 3'
@@ -113,7 +114,7 @@ class Game(tk.Tk):
         else:
             b_list.append(2)
         # print(b_list)
-        self.turns(2)
+        self.turns()
 
     def cb3(self):
         'Callback for button 4'
@@ -122,7 +123,7 @@ class Game(tk.Tk):
         else:
             b_list.append(3)
         # print(b_list)
-        self.turns(3)
+        self.turns()
 
     def cb4(self):
         'Callback for button 5'
@@ -131,7 +132,7 @@ class Game(tk.Tk):
         else:
             b_list.append(4)
         # print(b_list)
-        self.turns(4)
+        self.turns()
 
     def cb5(self):
         'Callback for button 6'
@@ -140,7 +141,7 @@ class Game(tk.Tk):
         else:
             b_list.append(5)
         # print(b_list)
-        self.turns(5)
+        self.turns()
 
     def cb6(self):
         'Callback for button 7'
@@ -149,7 +150,7 @@ class Game(tk.Tk):
         else:
             b_list.append(6)
         # print(b_list)
-        self.turns(6)
+        self.turns()
 
     def cb7(self):
         'Callback for button 8'
@@ -158,7 +159,7 @@ class Game(tk.Tk):
         else:
             b_list.append(7)
         # print(b_list)
-        self.turns(7)
+        self.turns()
 
     def cb8(self):
         'Callback for button 9'
@@ -167,7 +168,7 @@ class Game(tk.Tk):
         else:
             b_list.append(8)
         # print(b_list)
-        self.turns(8)
+        self.turns()
 
     def make_grid(self):
         'class method to create the game 3x3 grid'
@@ -193,8 +194,9 @@ class Game(tk.Tk):
         self.R9.grid(row=2, column=2)
         self.but_id = [self.R1, self.R2, self.R3, self.R4, self.R5, self.R6, self.R7, self.R8, self.R9]
 
-    def turns(self, value):
+    def turns(self):
         'determines the turns for the human moves'
+        
         # v = value
         board1 = b_list[:]
         # print(board1)
@@ -246,10 +248,13 @@ class Game(tk.Tk):
             if board[rows[0]] == board[rows[1]] == board[rows[2]] != '':
                 winner = board[rows[0]]
                 msg.showinfo('', 'Player {} won the game'.format(winner))
+                self.restart()
         if len(board) == 9 and '' not in board:
             if winner != 'X' or 'O':
                 msg.showinfo('', 'The game ended in a tie')
+                self.restart()
         return winner
+    
 
     def restart(self):
         'This method asks the user whether they are interested in playing the game again or not.'
@@ -262,7 +267,24 @@ class Game(tk.Tk):
         if option_s == 'No':
             self.destroy()
         else:
-            print('i have work here')
+            b_list.clear()
+            appender_lst.clear()
+            for i in range(9):
+                appender_lst.append('')
+                self.but_id[i].config(text='')
+           
+
+    # def computer_moves(self):
+    #     'finds the best moves for the computer to play in'
+    #     print('am here')
+    #     board = appender_lst[:]
+    #     print(board)
+    #     best_moves = (0, 1, 2, 3, 4, 5, 6, 7, 8)
+    #     for moves in board:
+    #         if moves != '':
+    #             board[moves] = t2
+    #             if self.winning() == t2:
+    #                 print('am here')
             
 
 Game().mainloop()
