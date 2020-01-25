@@ -263,19 +263,6 @@ class Game(tk.Tk):
             self.destroy()
         else:
             print('i have work here')
-
-    def computer_moves(self):
-        'finds the best moves for the computer to play in'
-        print('am here')
-        board = appender_lst[:]
-        print(board)
-        best_moves = (0, 1, 2, 3, 4, 5, 6, 7, 8)
-        for moves in board:
-            if moves != '':
-                board[moves] = t2
-                if self.winning() == t2:
-                    print('am here')
             
-
 
 Game().mainloop()
